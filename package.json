@@ -15,6 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "server": "cd server && hack_env/bin/flask run --no-debugger",
+    "serverwin": "cd server && flask run --no-debugger",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
