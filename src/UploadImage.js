@@ -10,20 +10,24 @@ class UploadImage extends React.Component {
 
   getEmojis = () => {
     // const {
-    //   data: {
-    //     data: { movies }
-    //   }
+    //   
     // } = await axios.get(
     //   //url
     // );
-    // this.setState({ movies, isLoading: false });
+    // this.setState({ , isLoading: false });
     setTimeout(() => {
       this.setState({ isLoading: false });
     }, 2500)
   };
 
+
+  fileSelectedHandler = (e) => {
+    console.log(e.target.files[0]);
+  }
+
   render() {
     const { isLoading } = this.state;
+
 
     return (
       <section className="container">
@@ -35,6 +39,7 @@ class UploadImage extends React.Component {
         ) : (
             <h2>Upload Image</h2>
           )}
+        <input type="file" onChange={this.fileSelectedHandler}/>
         <button className= "Submit__button" onClick={this.getEmojis}>Submit</button>
       </section>
     )

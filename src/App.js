@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import UploadImage from './UploadImage';
 import "./App.css";
-
+import loadingAnimation from './emoji_gif.gif';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +30,9 @@ class App extends Component {
       <section className= "container">
         {isLoading ? (
           <div className="loader">
-            <span className="loader__text"> Loading...</span>
+            <span className="loader__text"> 
+            <img src={loadingAnimation} alt="loading..." />
+            </span>
           </div>
         ) : (
             <UploadImage/>
