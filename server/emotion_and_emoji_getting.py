@@ -7,10 +7,24 @@ ENDPOINT = "https://fallhackapi.cognitiveservices.azure.com/"
 LOCATION = "westus2"
 
 
+def get_rectangle(faceDictionary):
+    """helper method to find coords"""
+    rect = faceDictionary.face_rectangle
+    left = rect.left
+    top = rect.top
+    right = left + rect.width
+    bottom = top + rect.height
+    
+    return ((left, top), (right, bottom))
+
+
 
 
 
 def get_emotions(image):
+    """
+    returns tuple of ((top left coords),(bottom right coords),emotion) for each face
+    """
     list_of_emotions = []
     dict_of_emotions = {}
     face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
@@ -29,8 +43,10 @@ def get_emotions(image):
         dict_of_emotions['sadness'] = face_emotion.sadness
         dict_of_emotions['surprise'] = face_emotion.surprise
         
+        coords = get_rectangle(face)
         biggest_emotion = max(dict_of_emotions, key = dict_of_emotions.get)
-        list_of_emotions.append(biggest_emotion)
+        face_state = (coords,biggest_emotion)
+        list_of_emotions.append(face_state)
 
     print(list_of_emotions)
 
