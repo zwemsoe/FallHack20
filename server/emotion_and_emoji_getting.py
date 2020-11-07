@@ -1,7 +1,6 @@
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
-import json, os, requests
-import http.client, urllib.request, urllib.parse, urllib.error, base64
+
 KEY = "9e52a3a05f2843b3a56ef3eec5653086"
 ENDPOINT = "https://fallhackapi.cognitiveservices.azure.com/"
 LOCATION = "westus2"
