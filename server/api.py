@@ -10,9 +10,9 @@ class ImageProcessing(Resource):
     def post(self):
         image = request.files['image']
         print(image)
-        #emotions = get_emotions(image)
-        #img = getManipulatedImage(emotions, image)
-        return {"Good": "All good!"}
+        emotions = get_emotions(image)
+        img = getManipulatedImage(emotions, image)
+        return {"image" : img}
 
 
 api.add_resource(ImageProcessing, "/image")
