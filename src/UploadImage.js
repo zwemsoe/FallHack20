@@ -29,29 +29,47 @@ class UploadImage extends React.Component {
   render() {
     const { isLoading } = this.state;
     return (
-        <div className="container">
-          <h1 className="header">App Title</h1>
-          <img style={{
-            width: '40%',
-            height: '40%',
-          }} src={backgroundImg} alt="backgroundImg" />
-          <h2 className="description">AI TOOLS RECOGNISE YOUR FACIAL EXPRESSION AND GIVE YOU AN EMOJI</h2>
-          <div className="inputContainer">
-            <input
-             type="file" 
-             name="random" 
-             accept= ".jpg,.jpeg,.png"
-             onChange = {this.handleChangeImage}
-             />
-            <input  
-             type="file" 
+
+
+      <div className="container">
+        <h1 className="header">App Title</h1>
+        <img style={{
+          width: '40%',
+          height: '40%',
+        }} src={backgroundImg} alt="backgroundImg" />
+        <h2 className="description">AI TOOLS RECOGNISE YOUR FACIAL EXPRESSION AND GIVE YOU AN EMOJI</h2>
+
+        <div className="inputContainer">
+          <input
+            style={{ display: 'none' }}
+            type="file"
+            name="random" 
+            accept= ".jpg,.jpeg,.png"
+            onChange={this.fileSelectedHandler}
+            ref={randomInput => this.randomInput = randomInput}
+          />
+          <input
+             style={{ display: 'none' }}
+            type="file"
              name="mymood" 
              accept= ".jpg,.jpeg,.png"
-             onChange = {this.handleChangeImage}
-             />
-          </div> 
-          <button onClick={this.fileUploadHandler}>Upload</button>
+            onChange={this.fileSelectedHandler}
+            ref={moodInput => this.moodInput = moodInput}
+          />
+
+          <button style={{marginRight: 15 }} onClick={()=>this.randomInput.click()}>Random</button>
+          <button style={{marginLeft: 15 }} onClick={()=>this.moodInput.click()}>My Mood</button>
+
+
+
         </div>
+
+        <button onClick={this.fileUploadHandler}>Upload</button>
+
+
+      </div>
+
+
 
     )
   }
