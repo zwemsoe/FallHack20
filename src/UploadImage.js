@@ -41,7 +41,7 @@ class UploadImage extends React.Component {
             <h2>Upload Image</h2>
           )}
           
-        <input type="file" name="pic"/>
+        <input type="file" name="image"/>
         <input type="submit" value="upload a file"/>
       
         </div>

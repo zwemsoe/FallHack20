@@ -18,7 +18,7 @@ class App extends Component {
       this.setState({ isLoading: false });
     }, 2500)
     //sample post api call
-    axios.post('/api/custom', { newText: 'Hello' }).then((res) => this.setState({ text: res.data }));
+    //axios.post('/api/custom', { newText: 'Hello' }).then((res) => this.setState({ text: res.data }));
 
   }
 
