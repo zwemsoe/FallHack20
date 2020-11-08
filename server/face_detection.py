@@ -50,8 +50,6 @@ def get_emotions(image):
 
 
   
-
-
     
 
 
