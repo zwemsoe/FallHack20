@@ -1,4 +1,4 @@
-from os
+
 from flask import Flask, flash, request
 
 
@@ -9,11 +9,12 @@ api = Api(app)
 
 
 class ImageProcessing(Resource):
-    def post(self,image):
+    def post(self):
+        image = request.files['image']
+        print("api hit")
+        print(image)
         
-
-        
-        return {"image": image}
+        return {"Good": "image passed api!"}
 
 
 
