@@ -56,8 +56,8 @@ class UploadImage extends React.Component {
             ref={moodInput => this.moodInput = moodInput}
           />
 
-          <button onClick={()=>this.randomInput.click()}>Random</button>
-          <button onClick={()=>this.moodInput.click()}>My Mood</button>
+          <button style={{marginRight: 15 }} onClick={()=>this.randomInput.click()}>Random</button>
+          <button style={{marginLeft: 15 }} onClick={()=>this.moodInput.click()}>My Mood</button>
 
 
 
