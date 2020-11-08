@@ -31,41 +31,46 @@ class UploadImage extends React.Component {
 
 
     return (
-      
-        <div className="container">
-          <h1 className="header">App Title</h1>
-          <img style={{
-            width: '40%',
-            height: '40%',
-          }} src={backgroundImg} alt="backgroundImg" />
-          <h2 className="description">AI TOOLS RECOGNISE YOUR FACIAL EXPRESSION AND GIVE YOU AN EMOJI</h2>
 
-          <div className="inputContainer">
-            <input
-            
-             type="file" 
-             name="pic" 
-             onChange={this.fileSelectedHandler}
-             />
-            <input
-            
-             type="file" 
-             name="pic" 
-             onChange={this.fileSelectedHandler}
-             />
+      <div className="container">
+        <h1 className="header">App Title</h1>
+        <img style={{
+          width: '40%',
+          height: '40%',
+        }} src={backgroundImg} alt="backgroundImg" />
+        <h2 className="description">AI TOOLS RECOGNISE YOUR FACIAL EXPRESSION AND GIVE YOU AN EMOJI</h2>
 
-            
+        <div className="inputContainer">
+          <input
+            style={{ display: 'none' }}
+            type="file"
+            name="pic"
+            onChange={this.fileSelectedHandler}
+            ref={randomInput => this.randomInput = randomInput}
+          />
+          <input
+             style={{ display: 'none' }}
+            type="file"
+            name="pic"
+            onChange={this.fileSelectedHandler}
+            ref={moodInput => this.moodInput = moodInput}
+          />
 
-          </div> 
+          <button onClick={()=>this.randomInput.click()}>Random</button>
+          <button onClick={()=>this.moodInput.click()}>My Mood</button>
 
-          <button onClick={this.fileUploadHandler}>Upload</button>
 
 
         </div>
 
+        <button onClick={this.fileUploadHandler}>Upload</button>
 
 
-     
+      </div>
+
+
+
+
 
     )
   }
