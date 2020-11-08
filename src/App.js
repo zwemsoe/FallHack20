@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import UploadImage from './UploadImage';
 import "./App.css";
+import loadingAnimation from './emoji_gif.gif';
 
 class App extends Component {
   constructor(props) {
@@ -27,14 +28,19 @@ class App extends Component {
     const { text } = this.state;
     const { isLoading } = this.state;
     return (
-      <section className= "container">
+      <section>
         {isLoading ? (
           <div className="loader">
-            <span className="loader__text"> Loading...</span>
+            <span className="loader__text"> 
+            <img style={{width: '150%',
+        height: '150%',}}src={loadingAnimation} alt="loading..." />
+            </span>
           </div>
         ) : (
             <UploadImage/>
           )}
+
+
       </section>
     )
   }
