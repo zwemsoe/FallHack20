@@ -15,7 +15,7 @@ class App extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.setState({ isLoading: false });
+      this.setState({ isLoading: false })
     }, 2500)
     //sample post api call
     //axios.post('/api/custom', { newText: 'Hello' }).then((res) => this.setState({ text: res.data }));

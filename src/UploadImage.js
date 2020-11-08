@@ -1,29 +1,34 @@
 import React from 'react';
 import backgroundImg from './background_img.jpg';
+import axios from 'axios';
 
 class UploadImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true
+      isLoading: true,
+      imageUrl: null,
+      type: null,
     }
   }
 
-  getEmojis = () => {
+  handleChangeImage = (ev) => {
+    console.log(ev.target.files);
+    console.log(ev.target.name);
+    this.setState({
+      imageUrl: ev.target.files[0],
+      type: ev.target.name,
+    });
+  }
 
-  };
-
-
-  fileSelectedHandler = (e) => {
-    console.log(e.target.files[0]);
+  fileUploadHandler = () => {
+    const {imageUrl, type} = this.state;
+    axios.post("/image", {imageUrl: imageUrl, type: type}).then(response => console.log(response));
   }
 
   render() {
     const { isLoading } = this.state;
-
-
     return (
-      <form action="http://127.0.0.1:5000/image" enctype="multipart/form-data" method="POST">
         <div className="container">
           <h1 className="header">App Title</h1>
           <img style={{
@@ -31,31 +36,22 @@ class UploadImage extends React.Component {
             height: '40%',
           }} src={backgroundImg} alt="backgroundImg" />
           <h2 className="description">AI TOOLS RECOGNISE YOUR FACIAL EXPRESSION AND GIVE YOU AN EMOJI</h2>
-
           <div className="inputContainer">
             <input
-            
              type="file" 
-             name="pic" 
+             name="random" 
+             accept= ".jpg,.jpeg,.png"
+             onChange = {this.handleChangeImage}
              />
-            <input
-            
+            <input  
              type="file" 
-             name="pic" 
+             name="mymood" 
+             accept= ".jpg,.jpeg,.png"
+             onChange = {this.handleChangeImage}
              />
-
-            
-
           </div> 
-
-          <input type="submit" value="upload a file" />
-
-
+          <button onClick={this.fileUploadHandler}>Upload</button>
         </div>
-
-
-
-      </form>
 
     )
   }
