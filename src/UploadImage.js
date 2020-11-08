@@ -30,7 +30,7 @@ class UploadImage extends React.Component {
 
 
     return (
-      <form action=" "  enctype="multipart/form-data" method="POST">
+      <form action="http://127.0.0.1:5000/image"  enctype="multipart/form-data" method="POST">
       <div className="container">
         <h1 className="header">App Title</h1>
         {isLoading ? (
@@ -43,7 +43,6 @@ class UploadImage extends React.Component {
           
         <input type="file" name="pic"/>
         <input type="submit" value="upload a file"/>
-      
       
         </div>
         </form>
