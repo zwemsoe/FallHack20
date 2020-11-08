@@ -27,7 +27,7 @@ class App extends Component {
     const { text } = this.state;
     const { isLoading } = this.state;
     return (
-      <section>
+      <section className="container2" >
         {isLoading ? (
           <div className="loader">
             <span className="loader__text"> 
