@@ -46,10 +46,8 @@ def get_emotions(image):
         face_state = (coords,biggest_emotion)
         list_of_emotions.append(face_state)
 
-    getManipulatedImage(list_of_emotions)
+    return list_of_emotions
 
-
-get_emotions("http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg")
 
   
 

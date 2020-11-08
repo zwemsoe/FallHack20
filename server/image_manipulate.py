@@ -52,9 +52,8 @@ def getEmotionEmojiPng(mood):
         print("Error! No image!")
             
     
-def getManipulatedImage(emotions):
-    res = requests.get('http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg')
-    img = Image.open(BytesIO(res.content))
+def getManipulatedImage(emotions, background):
+    img = Image.open(background)
     #emo = Image.open(BytesIO(getRandomEmojiPng()))
     print(emotions)
     for e in emotions:
@@ -69,4 +68,4 @@ def getManipulatedImage(emotions):
         new_emo = emo.resize((width, height))   
         img.paste(new_emo, lt, new_emo)
         
-    img.save('test.jpg', quality=100)
+    return img

@@ -18,7 +18,7 @@ class App extends Component {
       this.setState({ isLoading: false });
     }, 2500)
     //sample post api call
-    axios.post('/api/custom', { newText: 'Hello' }).then((res) => this.setState({ text: res.data }));
+    //axios.post('/api/custom', { newText: 'Hello' }).then((res) => this.setState({ text: res.data }));
 
   }
 
@@ -27,16 +27,19 @@ class App extends Component {
     const { text } = this.state;
     const { isLoading } = this.state;
     return (
-      <section className= "container">
+      <section>
         {isLoading ? (
           <div className="loader">
             <span className="loader__text"> 
-            <img src={loadingAnimation} alt="loading..." />
+            <img style={{width: '150%',
+        height: '150%',}}src={loadingAnimation} alt="loading..." />
             </span>
           </div>
         ) : (
             <UploadImage/>
           )}
+
+
       </section>
     )
   }
