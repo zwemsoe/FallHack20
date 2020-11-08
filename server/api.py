@@ -17,7 +17,7 @@ class ImageProcessing(Resource):
 
 
 
-api.add_resource(ImageProcessing, "/image/<string:image_url>")
+api.add_resource(ImageProcessing, "/image")
 
 
 if __name__ == "__main__":
