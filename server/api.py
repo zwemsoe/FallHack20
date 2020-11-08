@@ -1,4 +1,7 @@
-from flask import Flask
+from os
+from flask import Flask, flash, request
+
+
 from flask_restful import Resource, Api
 
 app = Flask(__name__)
@@ -6,10 +9,11 @@ api = Api(app)
 
 
 class ImageProcessing(Resource):
-    def post(self,image_url):
+    def post(self,image):
+        
 
         
-        return {"image url": image_url}
+        return {"image": image}
 
 
 
