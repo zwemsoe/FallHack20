@@ -1,36 +1,35 @@
 import React from 'react';
 import backgroundImg from './background_img.jpg';
+import axios from 'axios';
 
 class UploadImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      selectedFile: null
+      imageUrl: null,
+      type: null,
     }
   }
 
-  getEmojis = () => {
-
-  };
-
-
-  fileSelectedHandler = (e) => {
-    console.log(e.target.files[0]);
+  handleChangeImage = (ev) => {
+    console.log(ev.target.files);
+    console.log(ev.target.name);
     this.setState({
-      selectedFile: e.target.files[0]
-    })
+      imageUrl: ev.target.files[0],
+      type: ev.target.name,
+    });
   }
 
   fileUploadHandler = () => {
-
+    const {imageUrl, type} = this.state;
+    axios.post("/image", {imageUrl: imageUrl, type: type}).then(response => console.log(response));
   }
 
   render() {
     const { isLoading } = this.state;
-
-
     return (
+
 
       <div className="container">
         <h1 className="header">App Title</h1>
@@ -44,14 +43,16 @@ class UploadImage extends React.Component {
           <input
             style={{ display: 'none' }}
             type="file"
-            name="pic"
+            name="random" 
+            accept= ".jpg,.jpeg,.png"
             onChange={this.fileSelectedHandler}
             ref={randomInput => this.randomInput = randomInput}
           />
           <input
              style={{ display: 'none' }}
             type="file"
-            name="pic"
+             name="mymood" 
+             accept= ".jpg,.jpeg,.png"
             onChange={this.fileSelectedHandler}
             ref={moodInput => this.moodInput = moodInput}
           />
@@ -67,8 +68,6 @@ class UploadImage extends React.Component {
 
 
       </div>
-
-
 
 
 
