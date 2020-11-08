@@ -1,12 +1,24 @@
-from flask import Flask, request
+from os
+from flask import Flask, flash, request
+
+
+from flask_restful import Resource, Api
 
 app = Flask(__name__)
+api = Api(app)
 
-@app.route('/api', methods=['GET'])
-def index():
-    return 'Index'
 
-@app.route('/api/custom', methods=['POST'])
-def custom():
-    print(request.json['newText'])
-    return request.json['newText']
+class ImageProcessing(Resource):
+    def post(self,image):
+        
+
+        
+        return {"image": image}
+
+
+
+api.add_resource(ImageProcessing, "/image")
+
+
+if __name__ == "__main__":
+    app.run()
