@@ -30,8 +30,9 @@ class UploadImage extends React.Component {
 
 
     return (
-      <section className="container">
-        <h1>App Title</h1>
+      <form action="http://127.0.0.1:5000/image"  enctype="multipart/form-data" method="POST">
+      <div className="container">
+        <h1 className="header">App Title</h1>
         {isLoading ? (
           <div className="loader">
             <span className="loader__text"> Getting Emojis...</span>
@@ -39,9 +40,18 @@ class UploadImage extends React.Component {
         ) : (
             <h2>Upload Image</h2>
           )}
+<<<<<<< HEAD
         <input type="file" onChange={this.fileSelectedHandler}/>
         <button className= "Submit__button" onClick={this.getEmojis}>Submit</button>
       </section>
+=======
+          
+        <input type="file" name="pic"/>
+        <input type="submit" value="upload a file"/>
+      
+        </div>
+        </form>
+>>>>>>> StyleUploadImg.js
     )
   }
 

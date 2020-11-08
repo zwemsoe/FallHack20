@@ -3,6 +3,10 @@ import axios from 'axios';
 import UploadImage from './UploadImage';
 import "./App.css";
 import loadingAnimation from './emoji_gif.gif';
+<<<<<<< HEAD
+=======
+
+>>>>>>> StyleUploadImg.js
 class App extends Component {
   constructor(props) {
     super(props);
@@ -31,12 +35,19 @@ class App extends Component {
         {isLoading ? (
           <div className="loader">
             <span className="loader__text"> 
+<<<<<<< HEAD
             <img src={loadingAnimation} alt="loading..." />
+=======
+            <img style={{width: '150%',
+        height: '150%',}}src={loadingAnimation} alt="loading..." />
+>>>>>>> StyleUploadImg.js
             </span>
           </div>
         ) : (
             <UploadImage/>
           )}
+
+
       </section>
     )
   }

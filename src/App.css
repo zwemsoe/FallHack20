@@ -1,8 +1,11 @@
+html,
 .body {
   background-color: green;
 }
+
+
 .container {
-  height: 100%;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +13,12 @@
   background-color: green;
 }
 
-
+.headerStyle{
+  display:flex;
+}
+.submit__button{
+  display: flex;
+}
 .loader {
   width: 100%;
   height: 100%;
