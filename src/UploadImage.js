@@ -40,18 +40,12 @@ class UploadImage extends React.Component {
         ) : (
             <h2>Upload Image</h2>
           )}
-<<<<<<< HEAD
-        <input type="file" onChange={this.fileSelectedHandler}/>
-        <button className= "Submit__button" onClick={this.getEmojis}>Submit</button>
-      </section>
-=======
           
         <input type="file" name="pic"/>
         <input type="submit" value="upload a file"/>
       
         </div>
         </form>
->>>>>>> StyleUploadImg.js
     )
   }
 
