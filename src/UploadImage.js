@@ -5,7 +5,8 @@ class UploadImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true
+      isLoading: true,
+      selectedFile: null
     }
   }
 
@@ -16,6 +17,13 @@ class UploadImage extends React.Component {
 
   fileSelectedHandler = (e) => {
     console.log(e.target.files[0]);
+    this.setState({
+      selectedFile: e.target.files[0]
+    })
+  }
+
+  fileUploadHandler = () => {
+
   }
 
   render() {
@@ -23,7 +31,7 @@ class UploadImage extends React.Component {
 
 
     return (
-      <form action="http://127.0.0.1:5000/image" enctype="multipart/form-data" method="POST">
+      
         <div className="container">
           <h1 className="header">App Title</h1>
           <img style={{
@@ -37,25 +45,27 @@ class UploadImage extends React.Component {
             
              type="file" 
              name="pic" 
+             onChange={this.fileSelectedHandler}
              />
             <input
             
              type="file" 
              name="pic" 
+             onChange={this.fileSelectedHandler}
              />
 
             
 
           </div> 
 
-          <input type="submit" value="upload a file" />
+          <button onClick={this.fileUploadHandler}>Upload</button>
 
 
         </div>
 
 
 
-      </form>
+     
 
     )
   }
