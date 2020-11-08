@@ -1,6 +1,8 @@
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
-
+import json, os, requests
+import http.client, urllib.request, urllib.parse, urllib.error, base64
+from image_manipulate import *
 KEY = "9e52a3a05f2843b3a56ef3eec5653086"
 ENDPOINT = "https://fallhackapi.cognitiveservices.azure.com/"
 LOCATION = "westus2"
@@ -15,9 +17,6 @@ def get_rectangle(faceDictionary):
     bottom = top + rect.height
     
     return ((left, top), (right, bottom))
-
-
-
 
 
 def get_emotions(image):
@@ -47,11 +46,8 @@ def get_emotions(image):
         face_state = (coords,biggest_emotion)
         list_of_emotions.append(face_state)
 
-    print(list_of_emotions)
+    return list_of_emotions
 
-    
-
-get_emotions("http://www.historyplace.com/kennedy/president-family-portrait-closeup.jpg")
 
   
 
