@@ -7,6 +7,8 @@ from io import BytesIO
 from flask_restful import Resource, Api
 from base64 import b64encode
 from json import dumps
+from face_detection import *
+from image_manipulate import *
 
 app = Flask(__name__)
 api = Api(app)
