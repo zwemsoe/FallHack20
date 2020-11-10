@@ -1,79 +1,97 @@
-import React from 'react';
-import backgroundImg from './background_img.jpg';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
+import Modal from "react-awesome-modal";
 
 class UploadImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      imageUrl: null,
-      type: null,
+      image: null,
+      mode: null,
+      visible: false,
+    };
+  }
+
+  handleChange = (e) => {
+    if (e.target.files[0] == null) {
+      return;
     }
-  }
-
-  handleChangeImage = (ev) => {
-    console.log(ev.target.files);
-    console.log(ev.target.name);
+    console.log(e.target.files[0]);
     this.setState({
-      imageUrl: ev.target.files[0],
-      type: ev.target.name,
+      image: e.target.files[0],
     });
-  }
+  };
 
-  fileUploadHandler = () => {
-    const {imageUrl, type} = this.state;
-    axios.post("/image", {imageUrl: imageUrl, type: type}).then(response => console.log(response));
-  }
+  handleUpload = async () => {
+    const { image, mode } = this.state;
+    let data = new FormData();
+    data.append('file', image);
+    console.log("mode: ", mode)
+    try{
+    const upload_res = await axios
+      .post(`/api/imageUpload`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+    })
+    if(upload_res.status === 200){
+      const filename = upload_res.data;
+      const image_res = await axios
+        .get(`/image/${filename}`)
+      console.log(image_res)
+      const process_res = await axios.post('/api/process/random', {image: image_res.data})
+      console.log(process_res)
+    }
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  startModal = (type) => {
+    this.setState({
+      mode: type,
+      visible: true,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      visible: false,
+    });
+  };
 
   render() {
-    const { isLoading } = this.state;
+    const { mode } = this.state;
     return (
-
-
-      <div className="container">
-        <h1 className="header">App Title</h1>
-        <img style={{
-          width: '40%',
-          height: '40%',
-        }} src={backgroundImg} alt="backgroundImg" />
-        <h2 className="description">AI TOOLS RECOGNISE YOUR FACIAL EXPRESSION AND GIVE YOU AN EMOJI</h2>
-
-        <div className="inputContainer">
-          <input
-            style={{ display: 'none' }}
-            type="file"
-            name="random" 
-            accept= ".jpg,.jpeg,.png"
-            onChange={this.fileSelectedHandler}
-            ref={randomInput => this.randomInput = randomInput}
-          />
-          <input
-             style={{ display: 'none' }}
-            type="file"
-             name="mymood" 
-             accept= ".jpg,.jpeg,.png"
-            onChange={this.fileSelectedHandler}
-            ref={moodInput => this.moodInput = moodInput}
-          />
-
-          <button style={{marginRight: 15 }} onClick={()=>this.randomInput.click()}>Random</button>
-          <button style={{marginLeft: 15 }} onClick={()=>this.moodInput.click()}>My Mood</button>
-
-
-
-        </div>
-
-        <button onClick={this.fileUploadHandler}>Upload</button>
-
-
+      <div>
+        <Modal
+          visible={this.state.visible}
+          width='350'
+          height='100'
+          effect='fadeInUp'
+          onClickAway={() => this.closeModal()}
+        >
+          <div className='container' style={{ paddingTop: "1rem" }}>
+            <div className='display-grid-center'>
+                <input
+                onChange={this.handleChange}
+                ref={(ref) => {
+                  this.uploadInput = ref;
+                }}
+                type='file'
+                name= {mode}
+              />
+              <button className='btn btn-dark' onClick={this.handleUpload}>
+                Upload
+              </button>
+            </div>
+          </div>
+        </Modal>
       </div>
-
-
-
-    )
+    );
   }
-
 }
 
 export default UploadImage;

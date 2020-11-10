@@ -1,33 +1,38 @@
 
 from flask import Flask, flash, request, jsonify
 from PIL import Image
+from face_detection import *
+from image_manipulate import *
 import base64
-import numpy as np
 from io import BytesIO
 from flask_restful import Resource, Api
 from base64 import b64encode
 from json import dumps
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
-api = Api(app)
-
-class ImageProcessing(Resource):
-    def post(self):
-        file = request.files['image']
-        img_strm = Image.open(file.stream)
-        img_strm = img_strm.convert('RGB')
-        buffered = BytesIO()
-        img_strm.save(buffered, format="JPEG")
-        img_str64 = base64.b64encode(buffered.getvalue())
-        img_str = img_str64.decode('utf-8')
-        raw_data = {"image string": img_str}
-        json_img_data = dumps(raw_data, indent=2)
-        print("img_str64")
-        return json_img_data
+app.config["MONGO_URI"] = "mongodb+srv://fallhackdb:fallhackdb@freecluster.yg7sy.mongodb.net/Test?retryWrites=true&w=majority"
+mongo = PyMongo(app)
 
 
+@app.route('/api/imageUpload', methods=['POST'])
+def uploadImage():
+    img_file = request.files["file"]
+    mongo.save_file(img_file.filename, img_file)
+    return img_file.filename
 
-api.add_resource(ImageProcessing, "/image")
+
+@app.route('/image/<name>', methods=['GET'])
+def image(name):
+    return mongo.send_file(name)
+
+
+@app.route('/api/process/<mode>', methods=['POST'])
+def processImage(mode):
+    img = request.json['image']
+    # processed_img = getManipulatedImage(emotions_list, img_url, mode)
+    # print("processed_img")
+    return 'ok'
 
 
 if __name__ == '__main__':
