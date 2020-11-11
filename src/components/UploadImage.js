@@ -6,11 +6,10 @@ class UploadImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
       image: null,
       mode: null,
       visible: false,
-      imageUrl: "",
+      fileType: "",
     };
   }
 
@@ -18,27 +17,34 @@ class UploadImage extends React.Component {
     if (e.target.files[0] == null) {
       return;
     }
-    console.log(e.target.files[0]);
+    const fileParts = e.target.files[0].name.split(".");
+    const fileType = fileParts[fileParts.length - 1];
     this.setState({
       image: e.target.files[0],
+      fileType: fileType,
     });
   };
 
   handleUpload = async () => {
-    const { image, mode } = this.state;
+    const { image, mode, fileType } = this.state;
+    if(image == null){
+      return;
+    }
+    this.closeModal();
     let data = new FormData();
     data.append('file', image);
-    console.log("mode: ", mode)
+    data.append('fileType', fileType );
+    data.append('mode', mode);
+    this.props.setLoading();
     try{
     const upload_res = await axios
-      .post(`/api/imageUpload/${mode}`, data, {
+      .post(`/api/imageUpload`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
     })
      if(upload_res.status === 200 ){
-      this.props.parentCallback(upload_res.data);
-      this.closeModal();
+        this.props.parentCallback(upload_res.data);
     } 
 
     } catch (err) {
@@ -79,6 +85,7 @@ class UploadImage extends React.Component {
                 }}
                 type='file'
                 name= {mode}
+                accept= ".jpg,.jpeg,.png"
               />
               <button className='btn btn-dark' onClick={this.handleUpload}>
                 Upload

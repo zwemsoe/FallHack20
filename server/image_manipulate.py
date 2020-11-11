@@ -1,5 +1,5 @@
 from emojis import *
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image
 import requests
 import random
 from io import BytesIO
@@ -55,6 +55,8 @@ def getEmotionEmojiPng(mood):
 def getManipulatedImage(emotions, background, mode):
     img = Image.open(background)
     print(emotions)
+    if len(emotions) == 0:
+        return "no_face"
     for e in emotions:
         coords, mood = e
         emo_png = ''
