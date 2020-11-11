@@ -33,13 +33,14 @@ class App extends Component {
 
   uploadCallback = (url) => {
     this.setState({
-      imageUrl: url,
+      imageUrl: "data:image/ppg;base64," + url,
     });
   };
 
   render() {
     const { text } = this.state;
     const { isLoading } = this.state;
+    console.log("url: ", this.state.imageUrl)
     return (
       <div className='container2'>
         {isLoading ? (
@@ -57,8 +58,8 @@ class App extends Component {
             <h1 className='header'>App Title</h1>
             <img
               style={{
-                width: "40%",
-                height: "40%",
+                width: "400px",
+                height: "400px",
               }}
               src={backgroundImg}
               alt='backgroundImg'
@@ -82,6 +83,18 @@ class App extends Component {
               My Mood
             </button>
             </div>
+            { this.state.imageUrl === null ? 
+            <div></div>
+            :
+            <img
+              style={{
+                width: "auto",
+                height: "auto",
+              }}
+              src={this.state.imageUrl}
+              alt='resultImg'
+            />
+            }
           </div>
         )}
         <UploadImage

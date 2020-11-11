@@ -10,6 +10,7 @@ class UploadImage extends React.Component {
       image: null,
       mode: null,
       visible: false,
+      imageUrl: "",
     };
   }
 
@@ -30,21 +31,14 @@ class UploadImage extends React.Component {
     console.log("mode: ", mode)
     try{
     const upload_res = await axios
-      .post(`/api/imageUpload`, data, {
+      .post(`/api/imageUpload/${mode}`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
     })
-     if( 1 == 1|| upload_res.status === 200 ){
-      /* const filename = upload_res.data;
-      const image_res = await axios
-        .get(`/image/${filename}`)
-      console.log(image_res)
-      const process_res = await axios.post('/api/process/random', {image: image_res.data}) */
-      var process_res = new Image();
-      process_res.src = "https://images.unsplash.com/photo-1493836512294-502baa1986e2?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2000&fit=max&ixid=eyJhcHBfaWQiOjExNzczfQ"
-      
-      console.log(process_res)
+     if(upload_res.status === 200 ){
+      this.props.parentCallback(upload_res.data);
+      this.closeModal();
     } 
 
     } catch (err) {

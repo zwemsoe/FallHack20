@@ -16,11 +16,11 @@ app.config["MONGO_URI"] = "mongodb+srv://fallhackdb:fallhackdb@freecluster.yg7sy
 mongo = PyMongo(app)
 
 
-@app.route('/api/imageUpload', methods=['POST'])
-def uploadImage():
+@app.route('/api/imageUpload/<mode>', methods=['POST'])
+def uploadImage(mode):
     img_file = request.files["file"]
     emotions_list = get_emotions(img_file)
-    processed_img = getManipulatedImage(emotions_list, img_file, "random")
+    processed_img = getManipulatedImage(emotions_list, img_file, mode)
     #processed_img = io.TextIOWrapper(processed_img)
     
     buffered = BytesIO()
