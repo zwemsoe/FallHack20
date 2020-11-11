@@ -1,5 +1,5 @@
 from emojis import *
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image
 import requests
 import random
 from io import BytesIO
@@ -39,7 +39,7 @@ def getEmotionEmojiPng(mood):
         
     elif mood == 'surprise':
         i = random.randint(0,len(SURPRIRE)-1)
-        emoji = SURPRIRE[i]
+        emoji = SURPRISE[i]
         
     else:
         i = random.randint(0,len(FEAR)-1)
@@ -52,13 +52,18 @@ def getEmotionEmojiPng(mood):
         print("Error! No image!")
             
     
-def getManipulatedImage(emotions, background):
+def getManipulatedImage(emotions, background, mode):
     img = Image.open(background)
-    #emo = Image.open(BytesIO(getRandomEmojiPng()))
     print(emotions)
+    if len(emotions) == 0:
+        return "no_face"
     for e in emotions:
         coords, mood = e
-        emo_png = getEmotionEmojiPng(mood)
+        emo_png = ''
+        if mode == 'mymood':
+            emo_png = getEmotionEmojiPng(mood)
+        else:
+            emo_png = getRandomEmojiPng()
         emo = Image.open(BytesIO(emo_png))
         lt, rb = coords
         l, t = lt
@@ -66,6 +71,5 @@ def getManipulatedImage(emotions, background):
         width = r-l
         height = b-t
         new_emo = emo.resize((width, height))   
-        img.paste(new_emo, lt, new_emo)
-        
+        img.paste(new_emo, lt, new_emo)   
     return img
