@@ -26,7 +26,7 @@ def get_emotions(image):
     list_of_emotions = []
     dict_of_emotions = {}
     face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
-    detected_faces = face_client.face.detect_with_url(url=image,return_face_attributes=["emotion"])
+    detected_faces = face_client.face.detect_with_stream(image,return_face_attributes=["emotion"])
     
 
     for face in detected_faces:
