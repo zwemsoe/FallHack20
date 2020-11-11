@@ -21,13 +21,15 @@ def uploadImage():
     img_file = request.files["file"]
     emotions_list = get_emotions(img_file)
     processed_img = getManipulatedImage(emotions_list, img_file, "random")
+    #processed_img = io.TextIOWrapper(processed_img)
     
     buffered = BytesIO()
     processed_img.save(buffered, format="JPEG")
     processed_img_str = base64.b64encode(buffered.getvalue())
+    print(processed_img_str)
     
-    mongo.save_file(img_file.filename, processed_img_str)
-    return img_file.filename
+    #mongo.save_file(img_file.filename, processed_img_str)
+    return processed_img_str
 
 
 @app.route('/image/<name>', methods=['GET'])
