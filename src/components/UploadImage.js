@@ -38,7 +38,7 @@ class UploadImage extends React.Component {
     this.props.setLoading();
     try{
     const upload_res = await axios
-      .post(`/api/imageUpload`, data, {
+      .post(`https://emojimypic-server.herokuapp.com/api/imageUpload`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
