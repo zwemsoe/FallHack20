@@ -131,7 +131,7 @@ class App extends Component {
 
   conditionalRender = () => {
     const { isLoading, imageUrl } = this.state;
-    if(isLoading == true && imageUrl == null){
+    if(isLoading === true && imageUrl === null){
       return (
         <div>
           {this.renderLoading()}
