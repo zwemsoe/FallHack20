@@ -41,6 +41,7 @@ class UploadImage extends React.Component {
       .post(`https://emojimypic-server.herokuapp.com/api/imageUpload`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'Access-Control-Allow-Origin': 'https://emojimypic-server.herokuapp.com/api/imageUpload',
         },
     })
      if(upload_res.status === 200 ){

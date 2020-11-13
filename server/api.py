@@ -6,11 +6,15 @@ from image_manipulate import getManipulatedImage
 import base64
 from io import BytesIO
 from base64 import b64encode
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/api/imageUpload', methods=['POST'])
+@cross_origin()
 def uploadImage():
     img_file = request.files["file"]
     mode = request.form["mode"]
@@ -27,5 +31,10 @@ def uploadImage():
     processed_img_str = base64.b64encode(buffered.getvalue())
     return processed_img_str
 
+@app.route('/', methods=['GET'])
+@cross_origin()
+def index():
+    return "Index Page"
+
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", threaded=True, port=5000)
